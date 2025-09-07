@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bookRoutes = require('./routes/bookRoutes');
 const authRoutes = require('./routes/authRoutes');
+const statsRoutes = require('./routes/statsRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // 2. Initialize Express App
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.json()); // Parses incoming JSON requests
 // Use Routes
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/stats', statsRoutes);
+app.use('/api/users', userRoutes);
 
 // 4. Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
