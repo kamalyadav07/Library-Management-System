@@ -16,7 +16,8 @@ const AddBookForm = ({ onBookAdded }) => {
         e.preventDefault();
         try {
             const config = { headers: { 'x-auth-token': token } };
-            await axios.post('http://localhost:5000/api/books', formData, config);
+            // Use environment variable for API URL
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/books`, formData, config);
             toast.success('Book added successfully!');
             setFormData({ title: '', author: '', isbn: '', category: 'Fiction' });
             onBookAdded();
@@ -50,7 +51,8 @@ const Book = ({ book, onUpdate }) => {
     if (window.confirm(`Are you sure you want to borrow "${book.title}"?`)) {
       const config = { headers: { 'x-auth-token': token } };
       try {
-        await axios.put(`http://localhost:5000/api/books/${book._id}/borrow`, null, config);
+        // Use environment variable for API URL
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/books/${book._id}/borrow`, null, config);
         toast.info(`You borrowed "${book.title}"`);
         onUpdate();
       } catch (error) {
@@ -78,7 +80,8 @@ const BorrowedBook = ({ book, onUpdate }) => {
     if (window.confirm(`Are you sure you want to return "${book.title}"?`)) {
       const config = { headers: { 'x-auth-token': token } };
       try {
-        await axios.put(`http://localhost:5000/api/books/${book._id}/return`, null, config);
+        // Use environment variable for API URL
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/books/${book._id}/return`, null, config);
         toast.success(`You returned "${book.title}"`);
         onUpdate();
       } catch (error) {
@@ -130,7 +133,8 @@ const Library = () => {
         category: currentFilters.category,
         sort: currentFilters.sortBy,
       });
-      const res = await axios.get(`http://localhost:5000/api/books?${params.toString()}`);
+      // Use environment variable for API URL
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/books?${params.toString()}`);
       setAvailableBooks(res.data.books);
       setCurrentPage(res.data.currentPage);
       setTotalPages(res.data.totalPages);
@@ -146,7 +150,8 @@ const Library = () => {
     };
     try {
       const config = { headers: { 'x-auth-token': token } };
-      const borrowedRes = await axios.get('http://localhost:5000/api/users/borrowed', config);
+      // Use environment variable for API URL
+      const borrowedRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/borrowed`, config);
       setBorrowedBooks(borrowedRes.data);
     } catch (error) {
       // No toast here to avoid errors on logout/initial load
