@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 // List of URLs that are allowed to make requests to this backend
 const allowedOrigins = [
   'http://localhost:3000', // For local development
-  'https://your-frontend-deployment-url.vercel.app' // IMPORTANT: REPLACE WITH YOUR ACTUAL FRONTEND URL
+  'https://library-management-sy-git-005e8a-kamal-yadavs-projects-5d3ef459.vercel.app/' // DEPLOYED FRONTEND URL
 ];
 
 const corsOptions = {
